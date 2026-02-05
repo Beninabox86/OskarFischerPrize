@@ -39,7 +39,7 @@ const Footer: React.FC = () => {
 
         {/* Copyright */}
         <div className="text-center text-caption font-ui text-ink-muted">
-          <p>&copy; {new Date().getFullYear()} Truchard Ventures &middot; Authored, Designed and Curated by Frontier AI Models</p>
+          <p>&copy; {new Date().getFullYear()} Truchard Ventures &middot; Literature & Synthesis by Peer Review & Frontier AI Models</p>
         </div>
       </div>
     </footer>

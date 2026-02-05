@@ -412,10 +412,6 @@ const App: React.FC = () => {
           </div>
         </div>
 
-        <div>
-          <Heading level={3} className="mb-4">Stay Connected</Heading>
-          <EmailSignupForm source="about" />
-        </div>
       </div>
     </PageLayout>
   );
