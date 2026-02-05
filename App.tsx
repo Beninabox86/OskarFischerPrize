@@ -40,13 +40,14 @@ const App: React.FC = () => {
      Sidebar Component
      --------------------------------------------------------------------------- */
   const Sidebar = () => (
-    <div className="h-full bg-paper-dark text-white flex flex-col">
-      {/* Logo */}
-      <div className="p-6 border-b border-divider-dark">
-        <h1 className="font-display text-h3 text-white font-medium leading-tight">
-          Oskar Fischer<br />Prize
+    <div className="h-full sidebar-gradient text-white flex flex-col">
+      {/* Logo with gold accent */}
+      <div className="p-6 border-b border-white/10 relative">
+        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-prize-gold/60 to-transparent" />
+        <h1 className="font-display text-h3 text-white font-semibold leading-tight uppercase tracking-wide">
+          <span className="gold-text">Oskar Fischer</span><br />Prize
         </h1>
-        <p className="text-caption font-ui text-white/50 mt-2">2022 Living Literature Review</p>
+        <p className="text-caption font-ui text-prize-gold-light/70 mt-2 uppercase tracking-wider">Living Literature Review & Synthesis</p>
       </div>
 
       {/* Navigation */}
@@ -56,10 +57,10 @@ const App: React.FC = () => {
             key={item.view}
             onClick={() => setView(item.view as ViewState)}
             className={`
-              w-full text-left px-4 py-3 rounded font-ui text-small mb-1 transition-colors
+              w-full text-left px-4 py-3 font-ui text-small mb-1 transition-all duration-200
               ${view === item.view
-                ? 'bg-accent text-white'
-                : 'text-white/70 hover:bg-white/10 hover:text-white'
+                ? 'bg-prize-gold/20 text-prize-gold-light border-l-2 border-prize-gold'
+                : 'text-white/70 hover:bg-white/5 hover:text-white hover:border-l-2 hover:border-white/30'
               }
             `}
           >
@@ -68,12 +69,13 @@ const App: React.FC = () => {
         ))}
       </nav>
 
-      {/* Footer */}
-      <div className="p-4 border-t border-divider-dark">
-        <p className="text-caption font-ui text-white/50">
+      {/* Footer with circuit accent */}
+      <div className="p-4 border-t border-white/10 relative">
+        <div className="absolute top-0 left-4 right-4 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+        <p className="text-caption font-ui text-white/40">
           A companion site to<br />
-          <a href="https://adultcognitivedisease.org" className="text-accent-light hover:underline">
-            AdultCognitiveDisease.org
+          <a href="https://adultcognitivedisease.com" className="text-prize-gold-light/80 hover:text-prize-gold-light transition-colors">
+            AdultCognitiveDisease.com
           </a>
         </p>
       </div>
@@ -85,28 +87,27 @@ const App: React.FC = () => {
      --------------------------------------------------------------------------- */
   const HomePage = () => (
     <div className="min-h-screen">
-      {/* Hero */}
+      {/* Hero - Brand Art is the header */}
       <HeroSection size="lg">
-        <div className="text-center">
-          <div className="inline-flex items-center gap-2 bg-white/15 text-white px-4 py-2 rounded-full text-caption font-ui mb-8">
-            <Award size={16} />
-            <span>Recognizing Innovation in Alzheimer's Research</span>
+        <div className="text-center pt-4">
+          {/* Tagline badge */}
+          <div className="inline-flex items-center gap-2 bg-prize-gold/20 text-prize-gold-light px-4 py-2 angular-badge text-caption font-ui font-semibold uppercase tracking-wider mb-6 border border-prize-gold/30">
+            <Award size={16} className="rotate-12" />
+            <span>Living Literature Review & Synthesis</span>
           </div>
 
-          <Heading level={1} className="text-white mb-6">
-            The <span className="text-white">{PRIZE_INFO.name}</span>
-          </Heading>
-
-          <Text variant="lead" className="text-white/80 max-w-2xl mx-auto mb-10">
+          {/* Description */}
+          <Text variant="lead" className="text-white/90 max-w-2xl mx-auto mb-8">
             {PRIZE_INFO.description}
           </Text>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
             <Button
               variant="primary"
               size="lg"
               onClick={() => setView(ViewState.PARTICIPANTS)}
-              className="bg-accent text-white border-2 border-accent shadow-lg hover:bg-white hover:text-accent hover:border-white transition-all"
+              className="bg-prize-gold text-paper-dark border-2 border-prize-gold shadow-lg hover:bg-prize-gold-light hover:border-prize-gold-light transition-all"
             >
               Meet the Winners
             </Button>
@@ -121,12 +122,12 @@ const App: React.FC = () => {
           </div>
 
           {/* Featured Quote */}
-          <div className="border-t border-white/10 pt-8">
+          <div className="border-t border-prize-gold/30 pt-6">
             <blockquote className="text-center">
-              <p className="text-body-lg font-body italic text-white/80 mb-2">
+              <p className="text-body font-body italic text-white/80 mb-2">
                 "{FEATURED_QUOTE.text}"
               </p>
-              <cite className="text-small font-ui text-white not-italic">
+              <cite className="text-small font-ui text-prize-gold-light/70 not-italic">
                 — {FEATURED_QUOTE.attribution}
               </cite>
             </blockquote>
@@ -134,21 +135,31 @@ const App: React.FC = () => {
         </div>
       </HeroSection>
 
+      {/* Circuit Divider */}
+      <div className="circuit-divider bg-paper" />
+
       {/* Stats */}
       <Section background="warm" padding="md">
         <div className="max-w-4xl mx-auto">
           <GridSection columns={4} gap="md">
             <StatCard value="10" label="Prize Winners" />
-            <StatCard value="4" label="Gold Recipients" />
-            <StatCard value="2" label="Silver Recipients" />
-            <StatCard value="4" label="Bronze Recipients" />
+            <StatCard value="4" label="Gold Recipients" variant="gold" />
+            <StatCard value="2" label="Silver Recipients" variant="silver" />
+            <StatCard value="4" label="Bronze Recipients" variant="bronze" />
           </GridSection>
         </div>
       </Section>
 
+      {/* Circuit Divider */}
+      <div className="circuit-divider bg-paper" />
+
       {/* Featured Winners */}
       <ContentSection padding="lg">
-        <Heading level={2} className="text-center mb-10">Gold Prize Winners</Heading>
+        <div className="text-center mb-10 section-header-brand-center">
+          <Heading level={2}>
+            <span className="gold-text">Gold</span> Prize Winners
+          </Heading>
+        </div>
         <GridSection columns={2} gap="md">
           {getWinnersByTier('gold').map((winner) => (
             <WinnerCard
@@ -175,9 +186,15 @@ const App: React.FC = () => {
 
       {/* Email Signup */}
       <Section background="dark" padding="lg">
-        <div className="max-w-2xl mx-auto text-center">
-          <Heading level={2} className="text-white mb-4">Stay Updated</Heading>
-          <Text variant="body" className="text-white/60 mb-8">
+        <div className="max-w-2xl mx-auto text-center relative">
+          {/* Decorative circuit traces */}
+          <div className="absolute top-0 left-0 w-32 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent hidden md:block" />
+          <div className="absolute top-0 right-0 w-32 h-[1px] bg-gradient-to-l from-transparent via-white/20 to-transparent hidden md:block" />
+
+          <Heading level={2} className="text-white mb-4">
+            <span className="gold-text">Stay</span> Updated
+          </Heading>
+          <Text variant="body" className="text-white/70 mb-8">
             Get notified when new analyses and synthesis papers are published.
           </Text>
           <EmailSignupForm source="home" />
@@ -361,8 +378,8 @@ const App: React.FC = () => {
       <div className="space-y-8">
         <Text variant="body-lg">
           This website serves as a companion to{' '}
-          <a href="https://adultcognitivedisease.org" className="text-accent hover:underline">
-            AdultCognitiveDisease.org
+          <a href="https://adultcognitivedisease.com" className="text-accent hover:underline">
+            AdultCognitiveDisease.com
           </a>
           , focused specifically on the high-quality hypothesis generators who participated in the 2022
           Oskar Fischer Prize and seeded the knowledge base for understanding Alzheimer's disease.
@@ -378,17 +395,21 @@ const App: React.FC = () => {
         </div>
 
         {/* 100-Year Vision Section */}
-        <div className="bg-paper-warm p-8 rounded-lg border-l-4 border-accent">
-          <Text variant="caption" className="text-accent uppercase tracking-wider font-ui font-semibold mb-2">
-            The Long View
-          </Text>
-          <Heading level={3} className="mb-4">Building for the Future</Heading>
-          <Text variant="body-lg" className="text-ink-light">
-            Like National Instruments' legendary 100-year plan, this prize invests in ideas that will
-            shape understanding for generations. The Oskar Fischer Prize represents a commitment to
-            long-term scientific discovery over short-term gains—empowering researchers with the freedom
-            to pursue bold, transformative hypotheses about Alzheimer's disease.
-          </Text>
+        <div className="section-warm-blend p-8 relative content-card-brand" style={{ clipPath: 'polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%)' }}>
+          {/* Gold left accent */}
+          <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-prize-gold via-prize-gold-dark to-transparent" />
+          <div className="pl-4">
+            <Text variant="caption" className="text-prize-gold uppercase tracking-wider font-ui font-semibold mb-2">
+              The Long View
+            </Text>
+            <Heading level={3} className="mb-4">Building for the Future</Heading>
+            <Text variant="body-lg" className="text-ink-light">
+              Like National Instruments' legendary 100-year plan, this prize invests in ideas that will
+              shape understanding for generations. The Oskar Fischer Prize represents a commitment to
+              long-term scientific discovery over short-term gains—empowering researchers with the freedom
+              to pursue bold, transformative hypotheses about Alzheimer's disease.
+            </Text>
+          </div>
         </div>
 
         <div>
@@ -429,13 +450,15 @@ const App: React.FC = () => {
   return (
     <div className="flex h-screen w-screen bg-paper overflow-hidden flex-col md:flex-row">
       {/* Mobile Header */}
-      <div className="md:hidden flex items-center justify-between p-4 border-b border-divider bg-paper z-50 relative shrink-0">
-        <div className="font-display text-h3 text-accent font-medium leading-none">
-          Oskar Fischer<br />Prize
+      <div className="md:hidden flex items-center justify-between p-4 border-b border-prize-gold/20 sidebar-gradient z-50 relative shrink-0">
+        <div className="font-display text-h3 font-semibold leading-none uppercase tracking-wide">
+          <span className="gold-text">Oskar Fischer</span><br />
+          <span className="text-white">Prize</span>
         </div>
         <button
+          type="button"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="p-3 text-ink-light hover:bg-paper-warm rounded transition-colors"
+          className="p-3 text-white/70 hover:text-white hover:bg-white/10 rounded transition-colors"
           aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}

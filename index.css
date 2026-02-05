@@ -17,6 +17,8 @@
   --color-paper: #ffffff;
   --color-paper-warm: #f8fafc;
   --color-paper-dark: #002855;
+  --color-hero-dark: #0a1628;
+  --color-hero-mid: #0f2847;
 
   /* Colors - Accent (NI PMS 301 Blue) */
   --color-accent: #004B87;
@@ -27,13 +29,16 @@
   --color-divider: #e2e8f0;
   --color-divider-dark: #1e3a5f;
 
-  /* Colors - Tier System (blue intensity hierarchy) */
-  --color-gold: #004B87;
-  --color-gold-bg: #f0f7ff;
-  --color-silver: #004B87;
-  --color-silver-bg: #f0f7ff;
-  --color-bronze: #6b7280;
-  --color-bronze-bg: #f9fafb;
+  /* Colors - Tier System (from brand art) */
+  --color-gold: #C9A227;
+  --color-gold-light: #E8D48A;
+  --color-gold-dark: #9A7B0A;
+  --color-gold-glow: rgba(201, 162, 39, 0.4);
+  --color-gold-bg: #fefbf0;
+  --color-silver: #7C8895;
+  --color-silver-bg: #f8f9fa;
+  --color-bronze: #8B6914;
+  --color-bronze-bg: #fdf8ef;
 
   /* Typography Scale */
   --text-display: 3rem;      /* 48px */
@@ -94,13 +99,15 @@ body {
    Typography
    ----------------------------------------------------------------------------- */
 
-/* Headings - Playfair Display */
+/* Headings - Oswald (Bold Condensed) */
 h1, h2, h3, h4, h5, h6,
 .font-display {
-  font-family: 'Playfair Display', 'Georgia', serif;
+  font-family: 'Oswald', 'Impact', sans-serif;
   font-weight: 500;
   line-height: var(--leading-heading);
   color: var(--color-ink);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
 /* UI Text - DM Sans */
@@ -371,4 +378,696 @@ textarea:focus-visible {
   height: 8px;
   background-color: var(--color-accent);
   border-radius: 50%;
+}
+
+/* -----------------------------------------------------------------------------
+   Angular Geometric Accents (NI Eagle-Inspired)
+   ----------------------------------------------------------------------------- */
+
+/* Angular section divider - chevron pattern */
+.section-divider-angular {
+  height: 2px;
+  border: none;
+  background: repeating-linear-gradient(
+    135deg,
+    transparent,
+    transparent 8px,
+    var(--color-accent) 8px,
+    var(--color-accent) 12px
+  );
+  margin: var(--space-12) 0;
+}
+
+/* Corner accent - faceted triangle */
+.angular-accent {
+  position: relative;
+}
+
+.angular-accent::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 24px 24px 0;
+  border-color: transparent var(--color-accent) transparent transparent;
+  top: 0;
+  right: 0;
+  opacity: 0.15;
+  transition: opacity var(--transition-base);
+}
+
+.angular-accent:hover::before {
+  opacity: 0.3;
+}
+
+/* Angular badge - cut corner instead of rounded */
+.angular-badge {
+  clip-path: polygon(8px 0, 100% 0, 100% 100%, 0 100%, 0 8px);
+}
+
+/* Angular card - subtle corner cuts */
+.angular-card {
+  clip-path: polygon(
+    12px 0, calc(100% - 12px) 0,
+    100% 12px, 100% calc(100% - 12px),
+    calc(100% - 12px) 100%, 12px 100%,
+    0 calc(100% - 12px), 0 12px
+  );
+}
+
+/* Angular left border accent */
+.angular-border-left {
+  position: relative;
+  padding-left: var(--space-4);
+}
+
+.angular-border-left::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(
+    180deg,
+    var(--color-accent) 0%,
+    var(--color-accent) 70%,
+    transparent 70%,
+    transparent 75%,
+    var(--color-accent) 75%,
+    var(--color-accent) 100%
+  );
+}
+
+/* Angular hover lift effect */
+.angular-hover {
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.angular-hover:hover {
+  transform: translateY(-2px) translateX(2px);
+  box-shadow: -4px 4px 0 var(--color-accent);
+}
+
+/* Angular stat underline */
+.angular-underline::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 3px;
+  background: var(--color-accent);
+  margin-top: var(--space-2);
+  clip-path: polygon(0 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
+}
+
+/* -----------------------------------------------------------------------------
+   Brand Art Visual Elements (Phoenix/Circuit/Neural Theme)
+   ----------------------------------------------------------------------------- */
+
+/* Circuit board pattern - horizontal traces */
+.circuit-pattern {
+  position: relative;
+}
+
+.circuit-pattern::before,
+.circuit-pattern::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  height: 1px;
+  width: 200px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 20%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0.3) 80%,
+    transparent 100%
+  );
+}
+
+.circuit-pattern::before {
+  left: -220px;
+}
+
+.circuit-pattern::after {
+  right: -220px;
+}
+
+/* Glowing node - neural synapse dot */
+.glow-node {
+  position: relative;
+}
+
+.glow-node::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--color-gold);
+  border-radius: 50%;
+  box-shadow:
+    0 0 8px var(--color-gold-glow),
+    0 0 16px var(--color-gold-glow),
+    0 0 24px rgba(201, 162, 39, 0.2);
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Gold gradient text */
+.gold-text {
+  background: linear-gradient(
+    135deg,
+    var(--color-gold-light) 0%,
+    var(--color-gold) 50%,
+    var(--color-gold-dark) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Gold shimmer effect */
+.gold-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-gold-dark) 0%,
+    var(--color-gold-light) 25%,
+    var(--color-gold) 50%,
+    var(--color-gold-light) 75%,
+    var(--color-gold-dark) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Radial glow behind elements */
+.radial-glow {
+  position: relative;
+}
+
+.radial-glow::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150%;
+  height: 150%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(201, 162, 39, 0.15) 0%,
+    rgba(201, 162, 39, 0.05) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Bokeh floating particles */
+@keyframes float-bokeh {
+  0%, 100% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px) scale(1.1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-10px) translateX(-5px) scale(0.9);
+    opacity: 0.4;
+  }
+  75% {
+    transform: translateY(-25px) translateX(-10px) scale(1.05);
+    opacity: 0.5;
+  }
+}
+
+.bokeh-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(232, 212, 138, 0.8) 0%,
+    rgba(201, 162, 39, 0.4) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+  animation: float-bokeh 8s ease-in-out infinite;
+}
+
+/* Circuit trace line */
+.circuit-trace {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 10%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0.4) 90%,
+    transparent 100%
+  );
+}
+
+.circuit-trace::before,
+.circuit-trace::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  top: -2.5px;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
+}
+
+.circuit-trace::before { left: 0; }
+.circuit-trace::after { right: 0; }
+
+/* Vertical circuit with node */
+.circuit-vertical {
+  position: absolute;
+  width: 1px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 20%,
+    rgba(255, 255, 255, 0.5) 80%,
+    transparent 100%
+  );
+}
+
+/* Gold tier badge with glow */
+.tier-gold-glow {
+  box-shadow:
+    0 0 0 1px rgba(201, 162, 39, 0.3),
+    0 0 12px rgba(201, 162, 39, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  background: linear-gradient(
+    135deg,
+    rgba(254, 251, 240, 1) 0%,
+    rgba(232, 212, 138, 0.3) 100%
+  );
+}
+
+/* Premium card with gold accent */
+.premium-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.premium-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-gold-dark) 20%,
+    var(--color-gold-light) 50%,
+    var(--color-gold-dark) 80%,
+    transparent 100%
+  );
+}
+
+/* -----------------------------------------------------------------------------
+   Hero Art Integration
+   ----------------------------------------------------------------------------- */
+
+/* Seamless hero background matching brand art edges */
+.hero-art-bg {
+  background: linear-gradient(
+    to bottom,
+    var(--color-hero-dark) 0%,
+    var(--color-hero-mid) 20%,
+    var(--color-paper-dark) 50%,
+    var(--color-hero-mid) 80%,
+    var(--color-hero-dark) 100%
+  );
+}
+
+/* Hero art image container */
+.hero-art-container {
+  position: relative;
+  width: 100%;
+}
+
+.hero-art-container img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Edge fade overlays for seamless blending */
+.hero-art-fade-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(to bottom, var(--color-hero-dark) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.hero-art-fade-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(to top, var(--color-paper-dark) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.hero-art-fade-sides {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    var(--color-hero-dark) 0%,
+    transparent 10%,
+    transparent 90%,
+    var(--color-hero-dark) 100%
+  );
+  pointer-events: none;
+}
+
+/* -----------------------------------------------------------------------------
+   Sidebar Brand Integration
+   ----------------------------------------------------------------------------- */
+
+/* Sidebar gradient matching hero art */
+.sidebar-gradient {
+  background: linear-gradient(
+    180deg,
+    var(--color-hero-dark) 0%,
+    var(--color-hero-mid) 30%,
+    var(--color-paper-dark) 70%,
+    var(--color-hero-mid) 100%
+  );
+}
+
+/* -----------------------------------------------------------------------------
+   Section Transitions - Blending with Brand Art
+   ----------------------------------------------------------------------------- */
+
+/* Warm section with subtle gold accent */
+.section-warm-blend {
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    var(--color-paper-warm) 0%,
+    rgba(254, 251, 240, 0.5) 50%,
+    var(--color-paper-warm) 100%
+  );
+}
+
+.section-warm-blend::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(201, 162, 39, 0.2) 20%,
+    rgba(201, 162, 39, 0.3) 50%,
+    rgba(201, 162, 39, 0.2) 80%,
+    transparent 100%
+  );
+}
+
+/* Dark section blending into hero colors */
+.section-dark-blend {
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    var(--color-paper-dark) 0%,
+    var(--color-hero-mid) 50%,
+    var(--color-paper-dark) 100%
+  );
+}
+
+.section-dark-blend::before,
+.section-dark-blend::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+}
+
+.section-dark-blend::before {
+  top: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(201, 162, 39, 0.3) 30%,
+    rgba(201, 162, 39, 0.5) 50%,
+    rgba(201, 162, 39, 0.3) 70%,
+    transparent 100%
+  );
+}
+
+.section-dark-blend::after {
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 30%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.1) 70%,
+    transparent 100%
+  );
+}
+
+/* Circuit trace divider between sections */
+.circuit-divider {
+  position: relative;
+  height: 40px;
+  overflow: hidden;
+}
+
+.circuit-divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(201, 162, 39, 0.2) 10%,
+    rgba(201, 162, 39, 0.4) 50%,
+    rgba(201, 162, 39, 0.2) 90%,
+    transparent 100%
+  );
+}
+
+.circuit-divider::after {
+  content: '';
+  position: absolute;
+  top: calc(50% - 3px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background: var(--color-gold);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--color-gold-glow);
+}
+
+/* -----------------------------------------------------------------------------
+   Card Enhancements - Brand Accent Integration
+   ----------------------------------------------------------------------------- */
+
+/* Stat card with brand underline */
+.stat-card-brand {
+  position: relative;
+}
+
+.stat-card-brand::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-gold) 50%,
+    transparent 100%
+  );
+}
+
+/* Content card with subtle gold corner */
+.content-card-brand {
+  position: relative;
+  overflow: hidden;
+}
+
+.content-card-brand::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 20px 20px 0;
+  border-color: transparent rgba(201, 162, 39, 0.15) transparent transparent;
+  transition: border-color var(--transition-base);
+}
+
+.content-card-brand:hover::before {
+  border-color: transparent rgba(201, 162, 39, 0.3) transparent transparent;
+}
+
+/* -----------------------------------------------------------------------------
+   Page Content Wrapper - Seamless Background
+   ----------------------------------------------------------------------------- */
+
+/* Main content area background for non-home pages */
+.page-content-blend {
+  background: linear-gradient(
+    180deg,
+    var(--color-paper) 0%,
+    var(--color-paper-warm) 30%,
+    var(--color-paper) 60%,
+    var(--color-paper-warm) 100%
+  );
+  min-height: 100%;
+}
+
+/* Footer blend into dark */
+.footer-blend {
+  background: linear-gradient(
+    180deg,
+    var(--color-paper) 0%,
+    var(--color-paper-dark) 100%
+  );
+}
+
+/* -----------------------------------------------------------------------------
+   Typography Enhancements for Brand Cohesion
+   ----------------------------------------------------------------------------- */
+
+/* Section header with gold accent line */
+.section-header-brand {
+  position: relative;
+  padding-bottom: var(--space-4);
+}
+
+.section-header-brand::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--color-gold) 0%,
+    var(--color-gold-light) 50%,
+    transparent 100%
+  );
+}
+
+/* Centered section header variant */
+.section-header-brand-center::after {
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-gold) 30%,
+    var(--color-gold-light) 50%,
+    var(--color-gold) 70%,
+    transparent 100%
+  );
+  width: 100px;
+}
+
+/* Quote styling with brand accent */
+.brand-quote {
+  position: relative;
+  padding-left: var(--space-6);
+  border-left: 3px solid transparent;
+  border-image: linear-gradient(
+    180deg,
+    var(--color-gold) 0%,
+    var(--color-gold-dark) 100%
+  ) 1;
+}
+
+/* -----------------------------------------------------------------------------
+   Button & Interactive Enhancements
+   ----------------------------------------------------------------------------- */
+
+/* Primary button with gold hover glow */
+.btn-brand-primary {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-brand-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(232, 212, 138, 0.3) 0%,
+    transparent 50%
+  );
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.btn-brand-primary:hover::before {
+  opacity: 1;
+}
+
+/* Link with gold underline effect */
+.link-brand-accent {
+  position: relative;
+  text-decoration: none;
+}
+
+.link-brand-accent::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    var(--color-gold) 0%,
+    var(--color-gold-light) 100%
+  );
+  transition: width var(--transition-base);
+}
+
+.link-brand-accent:hover::after {
+  width: 100%;
 }

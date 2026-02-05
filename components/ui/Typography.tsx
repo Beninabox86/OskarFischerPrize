@@ -15,10 +15,10 @@ interface HeadingProps {
 }
 
 const headingStyles: Record<HeadingLevel, string> = {
-  1: 'text-display font-display font-medium text-ink',
-  2: 'text-h1 font-display font-medium text-ink',
-  3: 'text-h2 font-display font-medium text-ink',
-  4: 'text-h3 font-display font-medium text-ink',
+  1: 'text-display font-display font-semibold text-ink uppercase tracking-wide',
+  2: 'text-h1 font-display font-semibold text-ink uppercase tracking-wide',
+  3: 'text-h2 font-display font-medium text-ink uppercase tracking-wide',
+  4: 'text-h3 font-display font-medium text-ink uppercase tracking-wide',
 };
 
 export const Heading: React.FC<HeadingProps> = ({
@@ -113,23 +113,24 @@ interface TierBadgeProps {
   className?: string;
 }
 
-const tierStyles: Record<Tier, { bg: string; text: string; border: string; label: string }> = {
+const tierStyles: Record<Tier, { bg: string; text: string; border: string; label: string; glow?: string }> = {
   gold: {
-    bg: 'bg-accent/10',
-    text: 'text-accent',
-    border: 'border-accent/20',
+    bg: 'bg-gold-bg',
+    text: 'text-gold',
+    border: 'border-gold/30',
     label: 'Gold',
+    glow: 'tier-gold-glow',
   },
   silver: {
-    bg: 'bg-accent/5',
-    text: 'text-accent-light',
-    border: 'border-accent/10',
+    bg: 'bg-silver-bg',
+    text: 'text-silver',
+    border: 'border-silver/30',
     label: 'Silver',
   },
   bronze: {
-    bg: 'bg-ink-muted/10',
-    text: 'text-ink-light',
-    border: 'border-ink-muted/20',
+    bg: 'bg-bronze-bg',
+    text: 'text-bronze',
+    border: 'border-bronze/30',
     label: 'Bronze',
   },
 };
@@ -142,11 +143,11 @@ export const TierBadge: React.FC<TierBadgeProps> = ({
 
   return (
     <span
-      className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-caption font-ui font-medium border ${styles.bg} ${styles.text} ${styles.border} ${className}`}
+      className={`inline-flex items-center gap-2 px-3 py-1.5 angular-badge text-caption font-ui font-semibold uppercase tracking-wider border ${styles.bg} ${styles.text} ${styles.border} ${styles.glow || ''} ${className}`}
       role="status"
       aria-label={`${styles.label} Prize`}
     >
-      <span className="w-2 h-2 rounded-full bg-current" aria-hidden="true" />
+      <span className={`w-2 h-2 rotate-45 ${tier === 'gold' ? 'bg-gradient-to-br from-prize-gold-light to-prize-gold-dark' : 'bg-current'}`} aria-hidden="true" />
       {styles.label} Prize
     </span>
   );
@@ -168,15 +169,19 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
   className = '',
 }) => {
   return (
-    <header className={`mb-12 pb-8 border-b border-divider ${className}`}>
-      <Heading level={2} className="mb-3">
-        {title}
-      </Heading>
-      {subtitle && (
-        <Text variant="lead" className="max-w-2xl">
-          {subtitle}
-        </Text>
-      )}
+    <header className={`mb-12 pb-8 border-b border-divider relative ${className}`}>
+      {/* Gold accent line */}
+      <div className="absolute left-0 top-0 bottom-8 w-[3px] bg-gradient-to-b from-prize-gold via-prize-gold-dark to-transparent" />
+      <div className="pl-5">
+        <Heading level={2} className="mb-3">
+          {title}
+        </Heading>
+        {subtitle && (
+          <Text variant="lead" className="max-w-2xl normal-case">
+            {subtitle}
+          </Text>
+        )}
+      </div>
     </header>
   );
 };

@@ -61,9 +61,9 @@ export const Button: React.FC<ButtonProps> = ({
 }) => {
   const baseStyles = `
     inline-flex items-center justify-center gap-2
-    font-ui font-medium
-    rounded
-    transition-colors duration-200
+    font-ui font-semibold uppercase tracking-wider
+    angular-badge
+    transition-all duration-200
     disabled:opacity-50 disabled:cursor-not-allowed
   `;
 
@@ -111,8 +111,8 @@ export const IconButton: React.FC<IconButtonProps> = ({
 }) => {
   const baseStyles = `
     inline-flex items-center justify-center
-    rounded
-    transition-colors duration-200
+    angular-badge
+    transition-all duration-200
     disabled:opacity-50 disabled:cursor-not-allowed
   `;
 
@@ -149,7 +149,7 @@ export const BackButton: React.FC<BackButtonProps> = ({
   return (
     <button
       onClick={onClick}
-      className={`inline-flex items-center gap-2 text-accent hover:text-accent-hover font-ui font-medium transition-colors ${className}`}
+      className={`inline-flex items-center gap-2 text-accent hover:text-accent-hover font-ui font-semibold uppercase tracking-wider transition-all hover:-translate-x-1 ${className}`}
     >
       <svg
         width="16"
@@ -163,8 +163,8 @@ export const BackButton: React.FC<BackButtonProps> = ({
           d="M10 12L6 8L10 4"
           stroke="currentColor"
           strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+          strokeLinecap="square"
+          strokeLinejoin="miter"
         />
       </svg>
       {children}

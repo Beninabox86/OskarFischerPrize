@@ -15,8 +15,8 @@ interface SectionProps {
 
 const backgroundStyles = {
   default: 'bg-paper',
-  warm: 'bg-paper-warm',
-  dark: 'bg-paper-dark',
+  warm: 'section-warm-blend',
+  dark: 'section-dark-blend',
 };
 
 const paddingStyles = {
@@ -74,27 +74,39 @@ const heroSizeStyles = {
 export const HeroSection: React.FC<HeroSectionProps> = ({
   children,
   className = '',
-  size = 'md',
 }) => {
   return (
     <section
       className={`
         w-full
-        bg-gradient-to-br from-paper-dark via-accent to-paper-dark
         text-white
         relative
         overflow-hidden
-        ${heroSizeStyles[size]}
+        hero-art-bg
         ${className}
       `}
     >
-      {/* Subtle geometric accent */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-white/20 to-transparent" />
-        <div className="absolute bottom-0 left-0 w-1/3 h-1/2 bg-gradient-to-t from-white/10 to-transparent" />
-      </div>
-      <div className="max-w-4xl mx-auto px-6 md:px-8 relative z-10">
-        {children}
+      {/* Brand Art Image - The Hero Header */}
+      <div className="hero-art-container">
+        {/* The actual brand art image */}
+        <div className="relative w-full">
+          <img
+            src="/hero-art.jpg"
+            alt="Oskar Fischer Prize - Golden Phoenix with Neural Circuit Design"
+            className="w-full h-auto"
+          />
+          {/* Seamless edge fades */}
+          <div className="hero-art-fade-top" />
+          <div className="hero-art-fade-bottom" />
+          <div className="hero-art-fade-sides" />
+        </div>
+
+        {/* Content area below the art */}
+        <div className="relative z-10 -mt-20 pb-12 bg-gradient-to-b from-transparent via-paper-dark to-paper-dark">
+          <div className="max-w-4xl mx-auto px-6 md:px-8 pt-8">
+            {children}
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -195,7 +207,7 @@ export const SectionDivider: React.FC<SectionDividerProps> = ({
   className = '',
 }) => {
   return (
-    <hr className={`section-divider ${className}`} />
+    <hr className={`section-divider-angular ${className}`} />
   );
 };
 
@@ -212,9 +224,9 @@ interface TierSectionHeaderProps {
 }
 
 const tierBorderStyles: Record<Tier, string> = {
-  gold: 'border-accent text-accent',
-  silver: 'border-accent-light text-accent-light',
-  bronze: 'border-ink-light text-ink-light',
+  gold: 'border-gold text-gold',
+  silver: 'border-silver text-silver',
+  bronze: 'border-bronze text-bronze',
 };
 
 export const TierSectionHeader: React.FC<TierSectionHeaderProps> = ({
@@ -224,8 +236,8 @@ export const TierSectionHeader: React.FC<TierSectionHeaderProps> = ({
 }) => {
   return (
     <h2 className={`
-      font-ui text-small font-semibold uppercase tracking-wider
-      border-l-2 pl-4 mb-6
+      font-display text-h3 font-semibold uppercase tracking-wider
+      angular-border-left mb-6
       ${tierBorderStyles[tier]}
       ${className}
     `}>

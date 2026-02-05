@@ -93,27 +93,28 @@ interface WinnerCardProps {
   compact?: boolean;
 }
 
-const tierAccentStyles: Record<Tier, { border: string; badge: string; text: string; label: string; ring: string }> = {
+const tierAccentStyles: Record<Tier, { border: string; badge: string; text: string; label: string; ring: string; cardClass?: string }> = {
   gold: {
-    border: 'hover:border-accent',
-    badge: 'bg-accent/10 text-accent border border-accent/20',
-    text: 'text-accent',
+    border: 'hover:border-gold',
+    badge: 'bg-gold-bg text-gold border border-gold/30 tier-gold-glow',
+    text: 'text-gold',
     label: 'Gold Prize',
-    ring: 'ring-accent/20',
+    ring: 'ring-gold/30',
+    cardClass: 'premium-card',
   },
   silver: {
-    border: 'hover:border-accent-light',
-    badge: 'bg-accent/5 text-accent-light border border-accent/10',
-    text: 'text-accent-light',
+    border: 'hover:border-silver',
+    badge: 'bg-silver-bg text-silver border border-silver/30',
+    text: 'text-silver',
     label: 'Silver Prize',
-    ring: 'ring-accent/10',
+    ring: 'ring-silver/20',
   },
   bronze: {
-    border: 'hover:border-ink-light',
-    badge: 'bg-ink-muted/10 text-ink-light border border-ink-muted/20',
-    text: 'text-ink-light',
+    border: 'hover:border-bronze',
+    badge: 'bg-bronze-bg text-bronze border border-bronze/30',
+    text: 'text-bronze',
     label: 'Bronze Prize',
-    ring: 'ring-ink-muted/10',
+    ring: 'ring-bronze/20',
   },
 };
 
@@ -135,26 +136,29 @@ export const WinnerCard: React.FC<WinnerCardProps> = ({
       onClick={onClick}
       className={`
         w-full text-left
-        bg-white border border-divider/60 rounded-xl shadow-sm
+        bg-white border border-divider/60 shadow-sm
         transition-all duration-300 ease-out
-        ${tierStyles.border} hover:shadow-lg hover:-translate-y-0.5
+        ${tierStyles.border} hover:shadow-lg
         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2
         group
         relative
+        angular-accent angular-hover
+        ${tierStyles.cardClass || ''}
         ${compact ? 'p-5' : 'p-6'}
         ${className}
       `}
+      style={{ clipPath: 'polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%)' }}
     >
       <div className="flex justify-between items-start gap-4">
         <div className="flex-1 min-w-0">
           {/* Tier Badge */}
-          <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-caption font-ui font-medium mb-3 ${tierStyles.badge}`}>
-            <span className="w-1.5 h-1.5 rounded-full bg-current" aria-hidden="true" />
+          <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 angular-badge text-caption font-ui font-semibold uppercase tracking-wider mb-3 ${tierStyles.badge}`}>
+            <span className={`w-1.5 h-1.5 rotate-45 ${tier === 'gold' ? 'bg-gradient-to-br from-prize-gold-light to-prize-gold-dark' : 'bg-current'}`} aria-hidden="true" />
             {tierStyles.label}
           </div>
 
           {/* Name */}
-          <h3 className="font-display text-h3 text-ink group-hover:text-accent transition-colors mb-1">
+          <h3 className="font-display text-h3 text-ink group-hover:text-accent transition-colors mb-1 uppercase tracking-wide">
             {name}
           </h3>
 
@@ -176,22 +180,22 @@ export const WinnerCard: React.FC<WinnerCardProps> = ({
           )}
         </div>
 
-        {/* Arrow */}
+        {/* Angular Arrow */}
         <svg
           width="20"
           height="20"
           viewBox="0 0 20 20"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="flex-shrink-0 text-divider group-hover:text-accent transition-colors mt-1"
+          className="flex-shrink-0 text-divider group-hover:text-accent transition-all group-hover:translate-x-1 mt-1"
           aria-hidden="true"
         >
           <path
             d="M7.5 15L12.5 10L7.5 5"
             stroke="currentColor"
             strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+            strokeLinecap="square"
+            strokeLinejoin="miter"
           />
         </svg>
       </div>
@@ -207,19 +211,28 @@ interface StatCardProps {
   value: string | number;
   label: string;
   className?: string;
+  variant?: 'default' | 'gold' | 'silver' | 'bronze';
 }
 
 export const StatCard: React.FC<StatCardProps> = ({
   value,
   label,
   className = '',
+  variant = 'default',
 }) => {
+  const variantStyles = {
+    default: 'text-accent',
+    gold: 'gold-text',
+    silver: 'text-silver',
+    bronze: 'text-bronze',
+  };
+
   return (
     <div className={`text-center ${className}`}>
-      <div className="font-display text-display text-accent tabular-nums mb-1">
+      <div className={`font-display text-display tabular-nums mb-1 angular-underline inline-block ${variantStyles[variant]}`}>
         {value}
       </div>
-      <div className="text-small font-ui text-ink-muted uppercase tracking-wider">
+      <div className="text-small font-ui text-ink-muted uppercase tracking-wider font-semibold">
         {label}
       </div>
     </div>
@@ -246,9 +259,12 @@ export const TierInfoCard: React.FC<TierInfoCardProps> = ({
   const tierStyles = tierAccentStyles[tier];
 
   return (
-    <div className={`p-6 rounded-xl border ${tierStyles.border.replace('hover:', '')} bg-white shadow-sm ${className}`}>
-      <div className={`inline-flex items-center gap-2 ${tierStyles.badge} px-3 py-1 rounded-full text-caption font-ui font-medium mb-4`}>
-        <span className="w-2 h-2 rounded-full bg-current" />
+    <div
+      className={`p-6 border ${tierStyles.border.replace('hover:', '')} bg-white shadow-sm angular-accent ${tierStyles.cardClass || ''} ${className}`}
+      style={{ clipPath: 'polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%)' }}
+    >
+      <div className={`inline-flex items-center gap-2 ${tierStyles.badge} px-3 py-1 angular-badge text-caption font-ui font-semibold uppercase tracking-wider mb-4`}>
+        <span className={`w-2 h-2 rotate-45 ${tier === 'gold' ? 'bg-gradient-to-br from-prize-gold-light to-prize-gold-dark' : 'bg-current'}`} />
         {label} Prize
       </div>
       <p className="text-small font-body text-ink-light">{description}</p>
@@ -274,11 +290,14 @@ export const ComingSoonCard: React.FC<ComingSoonCardProps> = ({
   className = '',
 }) => {
   return (
-    <div className={`bg-paper-warm p-8 rounded-lg text-center ${className}`}>
-      <div className="inline-flex items-center justify-center w-16 h-16 bg-divider rounded-full text-ink-muted mb-4">
-        {icon}
+    <div
+      className={`bg-paper-warm p-8 text-center angular-accent ${className}`}
+      style={{ clipPath: 'polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px))' }}
+    >
+      <div className="inline-flex items-center justify-center w-16 h-16 bg-accent/10 text-accent mb-4 rotate-45">
+        <span className="-rotate-45">{icon}</span>
       </div>
-      <h2 className="font-display text-h3 text-ink mb-2">{title}</h2>
+      <h2 className="font-display text-h3 text-ink mb-2 uppercase tracking-wide">{title}</h2>
       <p className="text-body font-body text-ink-light max-w-md mx-auto">{description}</p>
     </div>
   );
