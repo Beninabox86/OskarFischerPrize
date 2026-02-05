@@ -1,0 +1,374 @@
+/* =============================================================================
+   OSKAR FISCHER PRIZE - DESIGN SYSTEM
+   National Instruments Classic Brand Aesthetic (1995-2020)
+   STRICT PALETTE: Blue (#004B87) | White (#ffffff) | Black (#1a1a1a)
+   ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   Design Tokens (CSS Custom Properties)
+   ----------------------------------------------------------------------------- */
+:root {
+  /* Colors - Ink (Text) */
+  --color-ink: #1a1a1a;
+  --color-ink-light: #374151;
+  --color-ink-muted: #6b7280;
+
+  /* Colors - Paper (Backgrounds) */
+  --color-paper: #ffffff;
+  --color-paper-warm: #f8fafc;
+  --color-paper-dark: #002855;
+
+  /* Colors - Accent (NI PMS 301 Blue) */
+  --color-accent: #004B87;
+  --color-accent-light: #0066b3;
+  --color-accent-hover: #003d6e;
+
+  /* Colors - Dividers & Borders */
+  --color-divider: #e2e8f0;
+  --color-divider-dark: #1e3a5f;
+
+  /* Colors - Tier System (blue intensity hierarchy) */
+  --color-gold: #004B87;
+  --color-gold-bg: #f0f7ff;
+  --color-silver: #004B87;
+  --color-silver-bg: #f0f7ff;
+  --color-bronze: #6b7280;
+  --color-bronze-bg: #f9fafb;
+
+  /* Typography Scale */
+  --text-display: 3rem;      /* 48px */
+  --text-h1: 2.25rem;        /* 36px */
+  --text-h2: 1.75rem;        /* 28px */
+  --text-h3: 1.375rem;       /* 22px */
+  --text-body-lg: 1.125rem;  /* 18px */
+  --text-body: 1rem;         /* 16px */
+  --text-small: 0.875rem;    /* 14px */
+  --text-xs: 0.75rem;        /* 12px */
+
+  /* Line Heights */
+  --leading-display: 1.15;
+  --leading-heading: 1.25;
+  --leading-body: 1.65;
+  --leading-tight: 1.4;
+
+  /* Spacing Scale (8px base) */
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+  --space-24: 6rem;     /* 96px */
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
+
+  /* Shadows - Contemporary, subtle depth */
+  --shadow-sm: 0 1px 2px rgba(0, 75, 135, 0.04);
+  --shadow-md: 0 4px 12px rgba(0, 75, 135, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 12px 24px rgba(0, 75, 135, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
+  --shadow-xl: 0 20px 40px rgba(0, 75, 135, 0.15), 0 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* -----------------------------------------------------------------------------
+   Base Styles
+   ----------------------------------------------------------------------------- */
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Source Serif 4', 'Georgia', serif;
+  color: var(--color-ink);
+  background-color: var(--color-paper);
+  line-height: var(--leading-body);
+}
+
+/* -----------------------------------------------------------------------------
+   Typography
+   ----------------------------------------------------------------------------- */
+
+/* Headings - Playfair Display */
+h1, h2, h3, h4, h5, h6,
+.font-display {
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-weight: 500;
+  line-height: var(--leading-heading);
+  color: var(--color-ink);
+}
+
+/* UI Text - DM Sans */
+.font-ui {
+  font-family: 'DM Sans', 'Arial', sans-serif;
+}
+
+/* Body Text - Source Serif 4 */
+.font-body {
+  font-family: 'Source Serif 4', 'Georgia', serif;
+}
+
+/* Type Scale Classes */
+.text-display {
+  font-size: var(--text-display);
+  line-height: var(--leading-display);
+  letter-spacing: -0.02em;
+}
+
+.text-h1 {
+  font-size: var(--text-h1);
+  line-height: var(--leading-heading);
+  letter-spacing: -0.01em;
+}
+
+.text-h2 {
+  font-size: var(--text-h2);
+  line-height: var(--leading-heading);
+}
+
+.text-h3 {
+  font-size: var(--text-h3);
+  line-height: var(--leading-heading);
+}
+
+.text-body-lg {
+  font-size: var(--text-body-lg);
+  line-height: var(--leading-body);
+}
+
+.text-body {
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+}
+
+.text-small {
+  font-size: var(--text-small);
+  line-height: var(--leading-tight);
+}
+
+.text-caption {
+  font-size: var(--text-xs);
+  line-height: var(--leading-tight);
+  letter-spacing: 0.02em;
+}
+
+/* -----------------------------------------------------------------------------
+   Color Utilities
+   ----------------------------------------------------------------------------- */
+.text-ink { color: var(--color-ink); }
+.text-ink-light { color: var(--color-ink-light); }
+.text-ink-muted { color: var(--color-ink-muted); }
+.text-accent { color: var(--color-accent); }
+
+.bg-paper { background-color: var(--color-paper); }
+.bg-paper-warm { background-color: var(--color-paper-warm); }
+.bg-paper-dark { background-color: var(--color-paper-dark); }
+
+.border-divider { border-color: var(--color-divider); }
+
+/* Tier Colors */
+.text-gold { color: var(--color-gold); }
+.text-silver { color: var(--color-silver); }
+.text-bronze { color: var(--color-bronze); }
+
+.bg-gold { background-color: var(--color-gold-bg); }
+.bg-silver { background-color: var(--color-silver-bg); }
+.bg-bronze { background-color: var(--color-bronze-bg); }
+
+.border-gold { border-color: var(--color-gold); }
+.border-silver { border-color: var(--color-silver); }
+.border-bronze { border-color: var(--color-bronze); }
+
+/* -----------------------------------------------------------------------------
+   Editorial Components
+   ----------------------------------------------------------------------------- */
+
+/* Drop Cap for article starts */
+.drop-cap::first-letter {
+  float: left;
+  font-family: 'Playfair Display', serif;
+  font-size: 4rem;
+  line-height: 0.8;
+  padding-right: 0.5rem;
+  color: var(--color-accent);
+  font-weight: 500;
+}
+
+/* Pull Quote */
+.pull-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: var(--text-h2);
+  font-style: italic;
+  color: var(--color-ink-light);
+  border-left: 3px solid var(--color-accent);
+  padding-left: var(--space-6);
+  margin: var(--space-8) 0;
+}
+
+/* Section Divider */
+.section-divider {
+  border: none;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-divider) 20%,
+    var(--color-divider) 80%,
+    transparent
+  );
+  margin: var(--space-12) 0;
+}
+
+/* -----------------------------------------------------------------------------
+   Focus States (Accessibility)
+   ----------------------------------------------------------------------------- */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* -----------------------------------------------------------------------------
+   Transitions
+   ----------------------------------------------------------------------------- */
+.transition-colors {
+  transition: color var(--transition-base),
+              background-color var(--transition-base),
+              border-color var(--transition-base);
+}
+
+.transition-transform {
+  transition: transform var(--transition-base);
+}
+
+.transition-all {
+  transition: all var(--transition-base);
+}
+
+/* -----------------------------------------------------------------------------
+   Scrollbar Styling
+   ----------------------------------------------------------------------------- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-paper);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-divider);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-ink-muted);
+}
+
+/* -----------------------------------------------------------------------------
+   Selection
+   ----------------------------------------------------------------------------- */
+::selection {
+  background-color: #b3d4fc;
+  color: var(--color-ink);
+}
+
+/* -----------------------------------------------------------------------------
+   Technical/Engineering Visual Elements (NI-Inspired)
+   ----------------------------------------------------------------------------- */
+
+/* Subtle engineering grid pattern */
+.technical-grid {
+  background-image:
+    linear-gradient(rgba(0, 75, 135, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 75, 135, 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Darker grid for dark backgrounds */
+.technical-grid-dark {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Corner markers for technical annotation style */
+.corner-marks::before,
+.corner-marks::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-color: var(--color-accent);
+  opacity: 0.3;
+  transition: opacity var(--transition-base);
+}
+
+.corner-marks::before {
+  top: 0;
+  left: 0;
+  border-top: 2px solid;
+  border-left: 2px solid;
+}
+
+.corner-marks::after {
+  bottom: 0;
+  right: 0;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+}
+
+.corner-marks:hover::before,
+.corner-marks:hover::after {
+  opacity: 0.6;
+}
+
+/* Measurement/data indicator dot */
+.data-indicator::before {
+  content: '';
+  position: absolute;
+  left: -1px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background-color: #ffffff;
+  border-radius: 50%;
+}
+
+/* Tabular numbers for data displays */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Instrument-style readout */
+.instrument-readout {
+  position: relative;
+  border-left: 2px solid var(--color-accent);
+  padding-left: var(--space-4);
+}
+
+.instrument-readout::before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 0;
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-accent);
+  border-radius: 50%;
+}

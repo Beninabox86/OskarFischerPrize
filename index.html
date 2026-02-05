@@ -5,10 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Oskar Fischer Prize | 2022 Living Literature Review</title>
     <meta name="description" content="A living literature review and synthesis of the 2022 Oskar Fischer Prize - $4 million awarded to 10 researchers with innovative Alzheimer's disease hypotheses." />
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              ink: {
+                DEFAULT: '#1a1a1a',
+                light: '#374151',
+                muted: '#6b7280',
+              },
+              paper: {
+                DEFAULT: '#ffffff',
+                warm: '#f8fafc',
+                dark: '#002855',
+              },
+              accent: {
+                DEFAULT: '#004B87',
+                light: '#0066b3',
+                hover: '#003d6e',
+              },
+              divider: {
+                DEFAULT: '#e2e8f0',
+                dark: '#1e3a5f',
+              },
+              gold: {
+                DEFAULT: '#004B87',
+                bg: '#f0f7ff',
+              },
+              silver: {
+                DEFAULT: '#004B87',
+                bg: '#f0f7ff',
+              },
+              bronze: {
+                DEFAULT: '#6b7280',
+                bg: '#f9fafb',
+              },
+            },
+            fontFamily: {
+              display: ['Playfair Display', 'Georgia', 'serif'],
+              body: ['Source Serif 4', 'Georgia', 'serif'],
+              ui: ['DM Sans', 'Arial', 'sans-serif'],
+              technical: ['IBM Plex Sans', 'system-ui', 'sans-serif'],
+            },
+            fontSize: {
+              'display': ['3rem', { lineHeight: '1.15', letterSpacing: '-0.02em' }],
+              'h1': ['2.25rem', { lineHeight: '1.25', letterSpacing: '-0.01em' }],
+              'h2': ['1.75rem', { lineHeight: '1.25' }],
+              'h3': ['1.375rem', { lineHeight: '1.25' }],
+              'body-lg': ['1.125rem', { lineHeight: '1.65' }],
+              'body': ['1rem', { lineHeight: '1.65' }],
+              'small': ['0.875rem', { lineHeight: '1.4' }],
+              'caption': ['0.75rem', { lineHeight: '1.4', letterSpacing: '0.02em' }],
+            },
+            spacing: {
+              '18': '4.5rem',
+              '22': '5.5rem',
+            },
+          },
+        },
+      }
+    </script>
+
+    <!-- Editorial Fonts: Playfair Display (headings), Source Serif 4 (body), DM Sans (UI), IBM Plex Sans (technical) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Playfair+Display:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 
     <!-- Microsoft Clarity - Heatmaps & Session Recordings -->
     <!-- TODO: Update project ID for this site -->
@@ -19,14 +84,6 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
       })(window, document, "clarity", "script", "REPLACE_WITH_CLARITY_ID");
     </script>
-    <style>
-      body {
-        font-family: 'Inter', sans-serif;
-      }
-      h1, h2, h3, h4, h5, h6, .serif-font {
-        font-family: 'Merriweather', serif;
-      }
-    </style>
   <script type="importmap">
 {
   "imports": {
@@ -39,7 +96,7 @@
 </script>
 <link rel="stylesheet" href="/index.css">
 </head>
-  <body class="bg-slate-50 text-slate-900 antialiased overflow-hidden">
+  <body class="bg-paper text-ink font-body antialiased overflow-hidden">
     <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>

@@ -1,5 +1,32 @@
 import { PrizeWinner, PrizeInfo, LibraryItem } from './types';
 
+/* =============================================================================
+   Inspirational Quotes (James Truchard / NI Philosophy)
+   ============================================================================= */
+
+export const INSPIRATION_QUOTES = [
+  {
+    text: "Accelerate productivity, innovation, and discovery.",
+    attribution: "National Instruments Mission",
+  },
+  {
+    text: "Innovation is about taking risks, being curious, and not being afraid to fail.",
+    attribution: "James Truchard, NI Co-founder",
+  },
+  {
+    text: "We've built a culture where young people know they can have an immediate impact.",
+    attribution: "James Truchard",
+  },
+  {
+    text: "I wanted to do for test and measurement what the spreadsheet did for financial analysis.",
+    attribution: "James Truchard",
+  },
+];
+
+export const FEATURED_QUOTE = INSPIRATION_QUOTES[1]; // "Innovation is about taking risks..."
+
+export const MISSION_STATEMENT = INSPIRATION_QUOTES[0]; // "Accelerate productivity..."
+
 export const PRIZE_INFO: PrizeInfo = {
   name: 'Oskar Fischer Prize',
   year: 2022,
