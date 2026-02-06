@@ -82,32 +82,37 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         text-white
         relative
         overflow-hidden
-        hero-art-bg
+        bg-paper-dark
         ${className}
       `}
     >
       {/* Brand Art Image - The Hero Header */}
       <div className="hero-art-container">
         {/* The actual brand art image */}
-        <div className="relative w-full">
+        <div className="relative w-full bg-hero-dark">
           <img
             src="/hero-art.jpg"
             alt="Oskar Fischer Prize - Golden Phoenix with Neural Circuit Design"
             className="w-full h-auto"
           />
-          {/* Seamless edge fades */}
+          {/* Atmospheric scrim - subtle tonal adjustment */}
+          <div className="hero-art-scrim" />
+          {/* Sculptural edge fades - dissolve the image into atmosphere */}
           <div className="hero-art-fade-top" />
-          <div className="hero-art-fade-bottom" />
+          <div className="hero-art-fade-bottom-extended" />
           <div className="hero-art-fade-sides" />
         </div>
 
-        {/* Content area below the art */}
-        <div className="relative z-10 -mt-20 pb-12 bg-gradient-to-b from-transparent via-paper-dark to-paper-dark">
-          <div className="max-w-4xl mx-auto px-6 md:px-8 pt-8">
+        {/* Content floats in the dissolved space */}
+        <div className="relative z-10 -mt-24 md:-mt-32 pb-10 md:pb-14 hero-content-feather">
+          <div className="max-w-4xl mx-auto px-6 md:px-8 pt-8 md:pt-12">
             {children}
           </div>
         </div>
       </div>
+
+      {/* Atmospheric transition - the hero breathes into the page */}
+      <div className="hero-to-page-feather" />
     </section>
   );
 };

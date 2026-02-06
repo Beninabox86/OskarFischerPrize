@@ -6,6 +6,7 @@ export enum ViewState {
   PARTICIPANT_DETAIL = 'PARTICIPANT_DETAIL',
   LIBRARY = 'LIBRARY',
   SYNTHESIS = 'SYNTHESIS',
+  BLOG = 'BLOG',
 }
 
 export type PrizeTier = 'gold' | 'silver' | 'bronze';

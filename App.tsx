@@ -3,7 +3,7 @@ import Footer from './components/Footer';
 import EmailSignupForm from './components/EmailSignupForm';
 import { ViewState } from './types';
 import { PRIZE_INFO, TIER_INFO, NAV_ITEMS, getWinnersByTier, getWinnerById, FEATURED_QUOTE, MISSION_STATEMENT } from './constants';
-import { Menu, X, Award, BookOpen, Lightbulb, ChevronRight } from 'lucide-react';
+import { Menu, X, Award, BookOpen, Lightbulb, ChevronRight, FileText } from 'lucide-react';
 import { useAnalyticsInit, usePageTracking } from './hooks/useAnalytics';
 
 // UI Components
@@ -37,49 +37,83 @@ const App: React.FC = () => {
   };
 
   /* ---------------------------------------------------------------------------
-     Sidebar Component
+     Top Navigation Component
      --------------------------------------------------------------------------- */
-  const Sidebar = () => (
-    <div className="h-full sidebar-gradient text-white flex flex-col">
-      {/* Logo with gold accent */}
-      <div className="p-6 border-b border-white/10 relative">
-        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-prize-gold/60 to-transparent" />
-        <h1 className="font-display text-h3 text-white font-semibold leading-tight uppercase tracking-wide">
-          <span className="gold-text">Oskar Fischer</span><br />Prize
-        </h1>
-        <p className="text-caption font-ui text-prize-gold-light/70 mt-2 uppercase tracking-wider">Living Literature Review & Synthesis</p>
-      </div>
+  const TopNav = () => (
+    <header className="w-full bg-paper-dark text-white relative z-50">
+      {/* Gold accent line */}
+      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-prize-gold/40 to-transparent" />
 
-      {/* Navigation */}
-      <nav className="flex-1 p-4">
-        {NAV_ITEMS.map((item) => (
+      <div className="max-w-7xl mx-auto px-6 md:px-8">
+        <div className="flex items-center justify-between h-16 md:h-20">
+          {/* Logo */}
           <button
-            key={item.view}
-            onClick={() => setView(item.view as ViewState)}
-            className={`
-              w-full text-left px-4 py-3 font-ui text-small mb-1 transition-all duration-200
-              ${view === item.view
-                ? 'bg-prize-gold/20 text-prize-gold-light border-l-2 border-prize-gold'
-                : 'text-white/70 hover:bg-white/5 hover:text-white hover:border-l-2 hover:border-white/30'
-              }
-            `}
+            type="button"
+            onClick={() => setView(ViewState.HOME)}
+            className="flex items-center gap-3 hover:opacity-90 transition-opacity"
           >
-            {item.label}
+            <h1 className="font-display text-xl md:text-2xl text-white font-semibold uppercase tracking-wide">
+              <span className="gold-text">Oskar Fischer</span> Prize
+            </h1>
           </button>
-        ))}
-      </nav>
 
-      {/* Footer with circuit accent */}
-      <div className="p-4 border-t border-white/10 relative">
-        <div className="absolute top-0 left-4 right-4 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-        <p className="text-caption font-ui text-white/40">
-          A companion site to<br />
-          <a href="https://adultcognitivedisease.com" className="text-prize-gold-light/80 hover:text-prize-gold-light transition-colors">
-            AdultCognitiveDisease.com
-          </a>
-        </p>
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-1">
+            {NAV_ITEMS.map((item) => (
+              <button
+                key={item.view}
+                onClick={() => setView(item.view as ViewState)}
+                className={`
+                  px-4 py-2 font-ui text-small uppercase tracking-wider transition-all duration-200
+                  ${view === item.view
+                    ? 'text-prize-gold-light'
+                    : 'text-white/70 hover:text-white'
+                  }
+                `}
+              >
+                {item.label}
+              </button>
+            ))}
+          </nav>
+
+          {/* Mobile Menu Button */}
+          <button
+            type="button"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden p-2 text-white/70 hover:text-white transition-colors"
+            aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
-    </div>
+
+      {/* Mobile Menu Dropdown */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden absolute top-full left-0 right-0 bg-paper-dark border-t border-white/10 shadow-xl">
+          <nav className="max-w-7xl mx-auto px-6 py-4">
+            {NAV_ITEMS.map((item) => (
+              <button
+                key={item.view}
+                onClick={() => {
+                  setView(item.view as ViewState);
+                  setIsMobileMenuOpen(false);
+                }}
+                className={`
+                  w-full text-left px-4 py-3 font-ui text-small uppercase tracking-wider transition-all duration-200
+                  ${view === item.view
+                    ? 'text-prize-gold-light bg-prize-gold/10'
+                    : 'text-white/70 hover:text-white hover:bg-white/5'
+                  }
+                `}
+              >
+                {item.label}
+              </button>
+            ))}
+          </nav>
+        </div>
+      )}
+    </header>
   );
 
   /* ---------------------------------------------------------------------------
@@ -135,11 +169,8 @@ const App: React.FC = () => {
         </div>
       </HeroSection>
 
-      {/* Circuit Divider */}
-      <div className="circuit-divider bg-paper" />
-
-      {/* Stats */}
-      <Section background="warm" padding="md">
+      {/* Stats - flows seamlessly from hero feather */}
+      <Section background="warm" padding="md" className="-mt-px">
         <div className="max-w-4xl mx-auto">
           <GridSection columns={4} gap="md">
             <StatCard value="10" label="Prize Winners" />
@@ -366,6 +397,151 @@ const App: React.FC = () => {
   );
 
   /* ---------------------------------------------------------------------------
+     Blog Page (Coming Soon)
+     --------------------------------------------------------------------------- */
+  const BlogPage = () => {
+    // Placeholder blog posts to preview the design
+    const placeholderPosts = [
+      {
+        category: 'Research Update',
+        title: 'Convergent Themes Across Prize-Winning Hypotheses',
+        excerpt: 'An analysis of how mitochondrial dysfunction, lipid metabolism, and protein clearance mechanisms intersect across multiple prize-winning theories.',
+        date: 'Coming Soon',
+        featured: true,
+      },
+      {
+        category: 'Interview',
+        title: 'In Conversation with Dr. Ralph Nixon on Lysosomal Dysfunction',
+        excerpt: 'A deep dive into the autophagy-lysosomal network and its implications for therapeutic development.',
+        date: 'Coming Soon',
+      },
+      {
+        category: 'Commentary',
+        title: 'Beyond Amyloid: The Prize\'s Challenge to Conventional Thinking',
+        excerpt: 'How the Oskar Fischer Prize encouraged researchers to look beyond the dominant amyloid cascade hypothesis.',
+        date: 'Coming Soon',
+      },
+      {
+        category: 'Literature Review',
+        title: 'The Mitochondrial Cascade: Evidence and Implications',
+        excerpt: 'Reviewing the supporting literature for Dr. Swerdlow\'s mitochondrial hypothesis of sporadic Alzheimer\'s disease.',
+        date: 'Coming Soon',
+      },
+    ];
+
+    const featuredPost = placeholderPosts.find(p => p.featured);
+    const recentPosts = placeholderPosts.filter(p => !p.featured);
+
+    return (
+      <div className="min-h-screen">
+        {/* Atmospheric Header with Neural Imagery */}
+        <div className="relative overflow-hidden">
+          {/* Hero art - cropped portion showing abstract neural patterns */}
+          <div className="relative h-48 md:h-64 lg:h-72">
+            <img
+              src="/hero-art.jpg"
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover object-[center_30%] scale-110"
+              aria-hidden="true"
+            />
+            {/* Atmospheric overlays */}
+            <div className="absolute inset-0 bg-gradient-to-b from-paper-dark/40 via-paper-dark/60 to-paper" />
+            <div className="absolute inset-0 bg-gradient-to-r from-paper-dark/30 via-transparent to-paper-dark/30" />
+            {/* Subtle accent pattern */}
+            <div className="absolute inset-0 opacity-20" style={{
+              backgroundImage: `radial-gradient(circle at 20% 50%, rgba(184, 150, 12, 0.1) 0%, transparent 50%),
+                               radial-gradient(circle at 80% 30%, rgba(184, 150, 12, 0.07) 0%, transparent 40%),
+                               radial-gradient(circle at 60% 80%, rgba(184, 150, 12, 0.05) 0%, transparent 35%)`
+            }} />
+          </div>
+
+          {/* Header content floating over the fade */}
+          <div className="relative -mt-20 md:-mt-24 pb-8 z-10">
+            <div className="max-w-4xl mx-auto px-6 md:px-8">
+              <div className="inline-flex items-center gap-2 bg-prize-gold/20 text-prize-gold-light px-3 py-1.5 angular-badge text-caption font-ui font-semibold uppercase tracking-wider mb-4 border border-prize-gold/30">
+                <FileText size={14} />
+                <span>Perspectives & Analysis</span>
+              </div>
+              <Heading level={1} className="text-ink mb-3">Blog</Heading>
+              <Text variant="lead" className="text-ink-light max-w-2xl">
+                Commentary, analysis, and updates on Alzheimer's disease research from the prize community.
+              </Text>
+            </div>
+          </div>
+        </div>
+
+        {/* Main Content */}
+        <div className="max-w-4xl mx-auto px-6 md:px-8 py-12">
+          {/* Featured Article */}
+          {featuredPost && (
+            <article
+              className="mb-10 p-8 bg-paper-warm border-l-4 border-prize-gold relative group cursor-not-allowed opacity-75"
+              style={{ clipPath: 'polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%)' }}
+            >
+              <div className="absolute top-4 right-6">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-prize-gold/20 text-prize-gold angular-badge text-caption font-ui font-semibold uppercase tracking-wider">
+                  Featured
+                </span>
+              </div>
+              <Text variant="caption" className="text-accent uppercase tracking-wider font-ui font-semibold mb-2">
+                {featuredPost.category}
+              </Text>
+              <Heading level={2} className="mb-3 group-hover:text-accent transition-colors">
+                {featuredPost.title}
+              </Heading>
+              <Text variant="body-lg" className="text-ink-light mb-4 max-w-3xl">
+                {featuredPost.excerpt}
+              </Text>
+              <Text variant="small" className="text-ink-muted font-ui">
+                {featuredPost.date}
+              </Text>
+            </article>
+          )}
+
+          {/* Recent Articles Grid */}
+          <div className="mb-10">
+            <Heading level={3} className="mb-6 uppercase tracking-wide text-ink-muted">
+              Recent Articles
+            </Heading>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {recentPosts.map((post, index) => (
+                <article
+                  key={index}
+                  className="p-6 bg-white border border-divider/60 shadow-sm relative cursor-not-allowed opacity-75 angular-accent"
+                  style={{ clipPath: 'polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%)' }}
+                >
+                  <Text variant="caption" className="text-accent uppercase tracking-wider font-ui font-semibold mb-2">
+                    {post.category}
+                  </Text>
+                  <Heading level={4} className="mb-2 text-h4">
+                    {post.title}
+                  </Heading>
+                  <Text variant="small" className="text-ink-light mb-4 line-clamp-3">
+                    {post.excerpt}
+                  </Text>
+                  <Text variant="caption" className="text-ink-muted font-ui">
+                    {post.date}
+                  </Text>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          {/* Coming Soon Notice */}
+          <div className="text-center py-8 border-t border-divider">
+            <div className="inline-flex items-center gap-2 text-ink-muted">
+              <FileText size={20} />
+              <Text variant="small" className="font-ui uppercase tracking-wider">
+                Articles publishing soon — check back for updates
+              </Text>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  /* ---------------------------------------------------------------------------
      About Page
      --------------------------------------------------------------------------- */
   const AboutPage = () => (
@@ -404,7 +580,7 @@ const App: React.FC = () => {
             </Text>
             <Heading level={3} className="mb-4">Building for the Future</Heading>
             <Text variant="body-lg" className="text-ink-light">
-              Like National Instruments' legendary 100-year plan, this prize invests in ideas that will
+              Like James Truchard's legendary 100-year plan at National Instruments, this prize invests in ideas that will
               shape understanding for generations. The Oskar Fischer Prize represents a commitment to
               long-term scientific discovery over short-term gains—empowering researchers with the freedom
               to pursue bold, transformative hypotheses about Alzheimer's disease.
@@ -433,6 +609,8 @@ const App: React.FC = () => {
         return <LibraryPage />;
       case ViewState.SYNTHESIS:
         return <SynthesisPage />;
+      case ViewState.BLOG:
+        return <BlogPage />;
       case ViewState.ABOUT:
         return <AboutPage />;
       default:
@@ -444,43 +622,14 @@ const App: React.FC = () => {
      Main Render
      --------------------------------------------------------------------------- */
   return (
-    <div className="flex h-screen w-screen bg-paper overflow-hidden flex-col md:flex-row">
-      {/* Mobile Header */}
-      <div className="md:hidden flex items-center justify-between p-4 border-b border-prize-gold/20 sidebar-gradient z-50 relative shrink-0">
-        <div className="font-display text-h3 font-semibold leading-none uppercase tracking-wide">
-          <span className="gold-text">Oskar Fischer</span><br />
-          <span className="text-white">Prize</span>
-        </div>
-        <button
-          type="button"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="p-3 text-white/70 hover:text-white hover:bg-white/10 rounded transition-colors"
-          aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
-        >
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
-
-      {/* Mobile Menu Overlay */}
-      <div
-        className={`
-          fixed inset-0 z-40 bg-paper-dark md:hidden pt-[73px]
-          transition-transform duration-300 ease-in-out
-          ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}
-        `}
-      >
-        <Sidebar />
-      </div>
-
-      {/* Sidebar - Desktop */}
-      <div className="hidden md:block w-72 h-full flex-shrink-0">
-        <Sidebar />
-      </div>
+    <div className="flex flex-col h-screen w-screen bg-paper overflow-hidden">
+      {/* Top Navigation */}
+      <TopNav />
 
       {/* Main Content */}
       <main
         ref={mainRef}
-        className="flex-1 h-full overflow-y-auto scroll-smooth relative"
+        className="flex-1 overflow-y-auto scroll-smooth"
       >
         {renderContent()}
         {view !== ViewState.HOME && <Footer />}

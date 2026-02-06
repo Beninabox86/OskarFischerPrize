@@ -187,5 +187,6 @@ export const NAV_ITEMS = [
   { label: 'Participants', view: 'PARTICIPANTS' },
   { label: 'Library', view: 'LIBRARY' },
   { label: 'Synthesis', view: 'SYNTHESIS' },
+  { label: 'Blog', view: 'BLOG' },
   { label: 'About', view: 'ABOUT' },
 ];
