@@ -3,7 +3,7 @@ import Footer from './components/Footer';
 import EmailSignupForm from './components/EmailSignupForm';
 import { ViewState } from './types';
 import { PRIZE_INFO, TIER_INFO, NAV_ITEMS, getWinnersByTier, getWinnerById, FEATURED_QUOTE, MISSION_STATEMENT, SYNTHESIS_PAPERS, getSynthesisPaperUrl, getSynthesisPapersByWinnerStatus } from './constants';
-import { Menu, X, Award, BookOpen, Lightbulb, ChevronRight, FileText, Download } from 'lucide-react';
+import { Menu, X, Award, BookOpen, Lightbulb, ChevronRight, FileText, Download, Lock } from 'lucide-react';
 import { useAnalyticsInit, usePageTracking } from './hooks/useAnalytics';
 
 // UI Components
@@ -383,6 +383,59 @@ const App: React.FC = () => {
      Synthesis Page
      --------------------------------------------------------------------------- */
   const SynthesisPage = () => {
+    const [isUnlocked, setIsUnlocked] = useState(() => sessionStorage.getItem('synthesis-unlocked') === 'true');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState(false);
+
+    const handleSubmit = (e: React.FormEvent) => {
+      e.preventDefault();
+      if (password === 'oskar') {
+        setIsUnlocked(true);
+        sessionStorage.setItem('synthesis-unlocked', 'true');
+        setError(false);
+      } else {
+        setError(true);
+      }
+    };
+
+    if (!isUnlocked) {
+      return (
+        <PageLayout>
+          <div className="max-w-md mx-auto text-center py-16">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-accent/10 text-accent mb-6 rotate-45">
+              <Lock size={28} className="-rotate-45" />
+            </div>
+            <Heading level={2} className="mb-3">Protected Content</Heading>
+            <Text className="text-ink-light mb-8">
+              Enter the password to access the synthesis reviews.
+            </Text>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => { setPassword(e.target.value); setError(false); }}
+                placeholder="Enter password"
+                className={`w-full px-4 py-3 border ${error ? 'border-red-400 bg-red-50/50' : 'border-divider'} bg-white font-body text-body text-ink placeholder:text-ink-muted/50 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-colors`}
+                autoFocus
+              />
+              {error && (
+                <Text variant="small" className="text-red-500">
+                  Incorrect password. Please try again.
+                </Text>
+              )}
+              <Button
+                variant="primary"
+                size="lg"
+                className="w-full bg-prize-gold text-paper-dark border-2 border-prize-gold hover:bg-prize-gold-light hover:border-prize-gold-light transition-all"
+              >
+                Unlock
+              </Button>
+            </form>
+          </div>
+        </PageLayout>
+      );
+    }
+
     const { prizeWinnerPapers, otherEntrantPapers } = getSynthesisPapersByWinnerStatus();
 
     const PaperRow: React.FC<{ paper: typeof SYNTHESIS_PAPERS[number] }> = ({ paper }) => {
