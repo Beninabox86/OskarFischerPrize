@@ -2,8 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import Footer from './components/Footer';
 import EmailSignupForm from './components/EmailSignupForm';
 import { ViewState } from './types';
-import { PRIZE_INFO, TIER_INFO, NAV_ITEMS, getWinnersByTier, getWinnerById, FEATURED_QUOTE, MISSION_STATEMENT } from './constants';
-import { Menu, X, Award, BookOpen, Lightbulb, ChevronRight, FileText } from 'lucide-react';
+import { PRIZE_INFO, TIER_INFO, NAV_ITEMS, getWinnersByTier, getWinnerById, FEATURED_QUOTE, MISSION_STATEMENT, SYNTHESIS_PAPERS, getSynthesisPaperUrl, getSynthesisPapersByWinnerStatus } from './constants';
+import { Menu, X, Award, BookOpen, Lightbulb, ChevronRight, FileText, Download } from 'lucide-react';
 import { useAnalyticsInit, usePageTracking } from './hooks/useAnalytics';
 
 // UI Components
@@ -380,21 +380,104 @@ const App: React.FC = () => {
   );
 
   /* ---------------------------------------------------------------------------
-     Synthesis Page (Coming Soon)
+     Synthesis Page
      --------------------------------------------------------------------------- */
-  const SynthesisPage = () => (
-    <PageLayout>
-      <SectionHeader
-        title="Synthesis"
-        subtitle="Cross-cutting analysis of how these hypotheses connect and complement each other."
-      />
-      <ComingSoonCard
-        icon={<Lightbulb size={32} />}
-        title="Coming Soon"
-        description="This section will explore the connections between different hypotheses, identify common themes, and present a unified view of the evolving understanding of Alzheimer's disease."
-      />
-    </PageLayout>
-  );
+  const SynthesisPage = () => {
+    const { prizeWinnerPapers, otherEntrantPapers } = getSynthesisPapersByWinnerStatus();
+
+    const PaperRow: React.FC<{ paper: typeof SYNTHESIS_PAPERS[number] }> = ({ paper }) => {
+      const winner = paper.winnerId ? getWinnerById(paper.winnerId) : null;
+      return (
+        <a
+          href={getSynthesisPaperUrl(paper.filename)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-start gap-4 p-5 bg-white border border-divider/60 shadow-sm transition-all duration-200 hover:border-accent hover:shadow-md group angular-accent"
+          style={{ clipPath: 'polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%)' }}
+        >
+          <div className="flex-shrink-0 mt-0.5">
+            <div className="w-10 h-10 flex items-center justify-center bg-accent/10 text-accent rotate-45">
+              <FileText size={18} className="-rotate-45" />
+            </div>
+          </div>
+          <div className="flex-1 min-w-0">
+            <h3 className="font-display text-body text-ink group-hover:text-accent transition-colors uppercase tracking-wide mb-1">
+              {paper.researcher}
+            </h3>
+            <p className="text-small font-body text-ink-light mb-1">{paper.title}</p>
+            {winner && (
+              <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 angular-badge text-caption font-ui font-semibold uppercase tracking-wider ${
+                winner.tier === 'gold' ? 'bg-gold-bg text-gold border border-gold/30' :
+                winner.tier === 'silver' ? 'bg-silver-bg text-silver border border-silver/30' :
+                'bg-bronze-bg text-bronze border border-bronze/30'
+              }`}>
+                <span className={`w-1.5 h-1.5 rotate-45 ${winner.tier === 'gold' ? 'bg-gradient-to-br from-prize-gold-light to-prize-gold-dark' : 'bg-current'}`} />
+                {winner.tier.charAt(0).toUpperCase() + winner.tier.slice(1)} Prize Winner
+              </span>
+            )}
+          </div>
+          <div className="flex-shrink-0 mt-1">
+            <Download size={18} className="text-ink-muted group-hover:text-accent transition-colors" />
+          </div>
+        </a>
+      );
+    };
+
+    return (
+      <PageLayout>
+        <SectionHeader
+          title="Synthesis"
+          subtitle="Critical reviews and evaluations of Alzheimer's disease hypotheses submitted to the Oskar Fischer Prize."
+        />
+
+        <Text variant="body-lg" className="mb-10">
+          These DeepResearch reviews evaluate each entrant's hypothesis against rigorous criteria including
+          scientific rigor, novelty, reproducibility, clinical potential, and evidence quality. Click any
+          paper to read the full review.
+        </Text>
+
+        {/* Prize Winner Reviews */}
+        <div className="mb-12">
+          <div className="flex items-center gap-3 mb-6">
+            <Award size={20} className="text-prize-gold" />
+            <Heading level={3} className="uppercase tracking-wide">
+              Prize Winner Reviews
+            </Heading>
+          </div>
+          <div className="space-y-3">
+            {prizeWinnerPapers.map((paper) => (
+              <PaperRow key={paper.id} paper={paper} />
+            ))}
+          </div>
+        </div>
+
+        {/* Other Entrant Reviews */}
+        <div className="mb-12">
+          <div className="flex items-center gap-3 mb-6">
+            <BookOpen size={20} className="text-accent" />
+            <Heading level={3} className="uppercase tracking-wide">
+              Other Entrant Reviews
+            </Heading>
+          </div>
+          <div className="space-y-3">
+            {otherEntrantPapers.map((paper) => (
+              <PaperRow key={paper.id} paper={paper} />
+            ))}
+          </div>
+        </div>
+
+        {/* Stats */}
+        <div className="text-center pt-8 border-t border-divider">
+          <div className="inline-flex items-center gap-2 text-ink-muted">
+            <FileText size={18} />
+            <Text variant="small" className="font-ui uppercase tracking-wider">
+              {SYNTHESIS_PAPERS.length} reviews published
+            </Text>
+          </div>
+        </div>
+      </PageLayout>
+    );
+  };
 
   /* ---------------------------------------------------------------------------
      Blog Page (Coming Soon)

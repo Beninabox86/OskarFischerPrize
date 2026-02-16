@@ -73,6 +73,14 @@ export interface VideoItem {
   thumbnail: string;
 }
 
+export interface SynthesisPaper {
+  id: string;
+  researcher: string;
+  title: string;
+  filename: string;
+  winnerId?: string; // Links to PrizeWinner if applicable
+}
+
 export interface PrizeInfo {
   name: string;
   year: number;

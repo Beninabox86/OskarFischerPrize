@@ -1,4 +1,4 @@
-import { PrizeWinner, PrizeInfo, LibraryItem } from './types';
+import { PrizeWinner, PrizeInfo, LibraryItem, SynthesisPaper } from './types';
 
 /* =============================================================================
    Inspirational Quotes (James Truchard / NI Philosophy)
@@ -178,6 +178,200 @@ export const TIER_INFO = {
     color: 'orange',
     description: 'Recognition for promising novel approaches',
   },
+};
+
+/* =============================================================================
+   Synthesis Papers - DeepResearch Reviews of Prize Entrants
+   ============================================================================= */
+
+const SYNTHESIS_FOLDER = '/COMPLETED - DeepResearch Reviews of Prize Entrants/';
+
+export const SYNTHESIS_PAPERS: SynthesisPaper[] = [
+  {
+    id: 'alan-snow',
+    researcher: 'Alan Snow',
+    title: 'The Heparan Sulfate Proteoglycan Unifying Hypothesis',
+    filename: 'Alan Snow_Evaluating Alzheimer\'s Hypothesis_ CAC Framework.pdf',
+  },
+  {
+    id: 'annelise-barron',
+    researcher: 'Annelise Barron',
+    title: 'Antimicrobial Peptide Defense & Disease Pathogenesis',
+    filename: 'Annellise Barron_PhD Thesis_ Alzheimer\'s Disease Pathogenesis Review.pdf',
+    winnerId: 'barron',
+  },
+  {
+    id: 'ari-rappoport',
+    researcher: 'Ari Rappoport',
+    title: 'Hypothesis Thesis Evaluation',
+    filename: 'Ari Rappoport_Alzheimer\'s Hypothesis Thesis Evaluation.pdf',
+  },
+  {
+    id: 'ashley-bush',
+    researcher: 'Ashley Bush',
+    title: 'Ferroptosis Theory of Alzheimer\'s Disease',
+    filename: 'Ashley Bush_Evaluating Alzheimer\'s Ferroptosis Theory.pdf',
+  },
+  {
+    id: 'bess-frost',
+    researcher: 'Bess Frost',
+    title: 'Tau-Induced DNA Damage & Chromatin Restructuring',
+    filename: 'Bess Frost_Thesis Evaluation of Alzheimer\'s Hypothesis.pdf',
+    winnerId: 'frost',
+  },
+  {
+    id: 'brenda-aske',
+    researcher: 'Brenda Aske',
+    title: 'COIL vs. Convergent Autophagic Collapse',
+    filename: 'Brenda Aske_Alzheimer\'s Hypothesis_ COIL vs. CAC.pdf',
+  },
+  {
+    id: 'brian-head',
+    researcher: 'Brian Head',
+    title: 'Hypothesis Thesis Review',
+    filename: 'Brian Head_Alzheimer\'s Hypothesis Thesis Review.pdf',
+  },
+  {
+    id: 'carina-clawson',
+    researcher: 'Carina Clawson',
+    title: 'Evaluating Hypothesis via CAC Framework',
+    filename: 'Carina Clawson_Evaluating Alzheimer\'s Hypothesis_ CAC Framework.pdf',
+  },
+  {
+    id: 'charles-greenblatt',
+    researcher: 'Charles Greenblatt',
+    title: 'BCG & Alzheimer\'s Hypothesis',
+    filename: 'Charles Greenblatt_Evaluating Alzheimer\'s Hypothesis_ BCG.pdf',
+  },
+  {
+    id: 'daniel-michaelson',
+    researcher: 'Daniel Michaelson',
+    title: 'Hypothesis Thesis Generation',
+    filename: 'Daniel Michaelson_Alzheimer\'s Hypothesis Thesis Generation.pdf',
+  },
+  {
+    id: 'donald-weaver',
+    researcher: 'Donald Weaver',
+    title: 'Autoimmune Disorder & Innate Immunity',
+    filename: 'Donald Weaver_Alzheimer\'s Hypothesis Thesis Evaluation.pdf',
+    winnerId: 'weaver',
+  },
+  {
+    id: 'erwin-roggen',
+    researcher: 'Erwin Roggen',
+    title: 'Hypothesis Generation Evaluation',
+    filename: 'Erwin Roggen_Evaluating Alzheimer\'s Hypothesis Generation.pdf',
+  },
+  {
+    id: 'estela-area-gomez',
+    researcher: 'Estela Area-Gomez',
+    title: 'Lipid Disorder & C99 Cholesterol Sensor',
+    filename: 'Estela Area-Gomez_Evaluating Alzheimer\'s Hypothesis for Prize.pdf',
+    winnerId: 'area-gomez',
+  },
+  {
+    id: 'gunnar-gouras',
+    researcher: 'Gunnar Gouras',
+    title: 'Intraneuronal Amyloid-Beta Accumulation',
+    filename: 'Gunnar Gouras_Alzheimer\'s Hypothesis Paper Review.pdf',
+    winnerId: 'gouras',
+  },
+  {
+    id: 'jeevan-pradhan',
+    researcher: 'Jeevan Pradhan',
+    title: 'Disease Hypothesis Thesis Generation',
+    filename: 'Jeevan Pradhan_Alzheimer\'s Disease Hypothesis Thesis Generation.pdf',
+  },
+  {
+    id: 'li-huei-tsai',
+    researcher: 'Li-Huei Tsai',
+    title: 'Hypothesis Thesis Generation',
+    filename: 'Li-Huei Tsai_Alzheimer\'s Hypothesis Thesis Generation.pdf',
+  },
+  {
+    id: 'maxim-shokhirev',
+    researcher: 'Maxim Shokhirev',
+    title: 'Thesis Review: Aging & Alzheimer\'s Hypothesis',
+    filename: 'Maxim Shokhirev_Thesis Review_ Shokhirev\'s Alzheimer\'s Hypothesis.pdf',
+  },
+  {
+    id: 'michal-schwartz-1',
+    researcher: 'Michal Schwartz',
+    title: 'Neuroimmunology & Hypothesis Thesis Generation',
+    filename: 'Michal Schwartz_Alzheimer\'s Hypothesis Thesis Generation (1).pdf',
+  },
+  {
+    id: 'michal-schwartz-2',
+    researcher: 'Michal Schwartz',
+    title: 'Evaluating Hypothesis via CAC Framework',
+    filename: 'Michal Schwartz_Evaluating Alzheimer\'s Hypothesis_ CAC Framework.pdf',
+  },
+  {
+    id: 'pamela-maher',
+    researcher: 'Pamela Maher',
+    title: 'Evaluating Hypotheses via CAC Framework',
+    filename: 'Pamela Maher_Evaluating Alzheimer\'s Hypotheses_ CAC Framework.pdf',
+  },
+  {
+    id: 'paul-cox',
+    researcher: 'Paul Cox',
+    title: 'Evaluating Hypothesis via CAC Framework',
+    filename: 'Paul Cox_Evaluating Alzheimer\'s Hypothesis_ CAC Framework.pdf',
+  },
+  {
+    id: 'ralph-nixon',
+    researcher: 'Ralph Nixon',
+    title: 'Autophagic Collapse & Lysosomal Network Failure',
+    filename: 'Ralph Nixon_Alzheimer\'s Hypothesis_ Autophagic Collapse.pdf',
+    winnerId: 'nixon',
+  },
+  {
+    id: 'richelle-cutler',
+    researcher: 'Richelle Cutler',
+    title: 'Disease Hypothesis Generation',
+    filename: 'Richelle Cutler_Alzheimer\'s Disease Hypothesis Generation.pdf',
+  },
+  {
+    id: 'russell-swerdlow',
+    researcher: 'Russell Swerdlow',
+    title: 'Mitochondrial Cascade & CAC',
+    filename: 'Russell Swerdlow_Alzheimer\'s Hypothesis_ CAC and Mitochondria.pdf',
+    winnerId: 'swerdlow',
+  },
+  {
+    id: 'ruth-itzhaki',
+    researcher: 'Ruth Itzhaki',
+    title: 'Hypothesis Review & Evaluation',
+    filename: 'Ruth Itzhaki_Alzheimer\'s Hypothesis Review and Evaluation.pdf',
+  },
+  {
+    id: 'stephen-dominy',
+    researcher: 'Stephen Dominy',
+    title: 'CAC & Dominy\'s Infectious Hypothesis',
+    filename: 'Stephen Dominy_Alzheimer\'s Thesis_ CAC and Dominy.pdf',
+  },
+  {
+    id: 'zaven-khachaturian',
+    researcher: 'Zaven S. Khachaturian',
+    title: 'Hypothesis Thesis Evaluation',
+    filename: 'Zaven S. Khachaturian_Alzheimer\'s Hypothesis Thesis Evaluation.pdf',
+  },
+  {
+    id: 'zhen-huang',
+    researcher: 'Zhen Huang',
+    title: 'Evaluating Hypothesis via CAC Framework',
+    filename: 'Zhen Huang_Evaluating Alzheimer\'s Hypothesis_ CAC Framework.pdf',
+  },
+];
+
+export const getSynthesisPaperUrl = (filename: string): string => {
+  return SYNTHESIS_FOLDER + filename;
+};
+
+export const getSynthesisPapersByWinnerStatus = () => {
+  const prizeWinnerPapers = SYNTHESIS_PAPERS.filter(p => p.winnerId);
+  const otherEntrantPapers = SYNTHESIS_PAPERS.filter(p => !p.winnerId);
+  return { prizeWinnerPapers, otherEntrantPapers };
 };
 
 // Site navigation structure
