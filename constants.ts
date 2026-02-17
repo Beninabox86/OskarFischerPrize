@@ -220,6 +220,13 @@ export const SYNTHESIS_PAPERS: SynthesisPaper[] = [
     winnerId: 'frost',
   },
   {
+    id: 'bernd-moosmann',
+    researcher: 'Bernd Moosmann',
+    title: 'Membrane Protein Oxidation',
+    filename: 'Bernd Moosmann_Alzheimer\'s Hypothesis Synthesis Thesis.pdf',
+    winnerId: 'moosmann',
+  },
+  {
     id: 'brenda-aske',
     researcher: 'Brenda Aske',
     title: 'COIL vs. Convergent Autophagic Collapse',
@@ -230,6 +237,13 @@ export const SYNTHESIS_PAPERS: SynthesisPaper[] = [
     researcher: 'Brian Head',
     title: 'Hypothesis Thesis Review',
     filename: 'Brian Head_Alzheimer\'s Hypothesis Thesis Review.pdf',
+  },
+  {
+    id: 'carlo-abbate',
+    researcher: 'Carlo Abbate',
+    title: 'Adult Neurogenesis Theory',
+    filename: 'Carlo Abbate_Alzheimer\'s Hypothesis Thesis Review.pdf',
+    winnerId: 'abbate',
   },
   {
     id: 'carina-clawson',
@@ -295,15 +309,9 @@ export const SYNTHESIS_PAPERS: SynthesisPaper[] = [
     filename: 'Maxim Shokhirev_Thesis Review_ Shokhirev\'s Alzheimer\'s Hypothesis.pdf',
   },
   {
-    id: 'michal-schwartz-1',
+    id: 'michal-schwartz',
     researcher: 'Michal Schwartz',
-    title: 'Neuroimmunology & Hypothesis Thesis Generation',
-    filename: 'Michal Schwartz_Alzheimer\'s Hypothesis Thesis Generation (1).pdf',
-  },
-  {
-    id: 'michal-schwartz-2',
-    researcher: 'Michal Schwartz',
-    title: 'Evaluating Hypothesis via CAC Framework',
+    title: 'Immune Restoration vs. Neuronal Autophagic Collapse',
     filename: 'Michal Schwartz_Evaluating Alzheimer\'s Hypothesis_ CAC Framework.pdf',
   },
   {
@@ -349,6 +357,13 @@ export const SYNTHESIS_PAPERS: SynthesisPaper[] = [
     researcher: 'Stephen Dominy',
     title: 'CAC & Dominy\'s Infectious Hypothesis',
     filename: 'Stephen Dominy_Alzheimer\'s Thesis_ CAC and Dominy.pdf',
+  },
+  {
+    id: 'varghese-john',
+    researcher: 'Varghese John',
+    title: 'Gamma Oscillation Enhancement',
+    filename: 'Varghese John_Alzheimer\'s Hypothesis Thesis Evaluation.pdf',
+    winnerId: 'john',
   },
   {
     id: 'zaven-khachaturian',
